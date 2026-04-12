@@ -71,7 +71,7 @@ def validate(req: ValidateRequest):
     if lic["app"] != req.app:
         return {"valid": False, "reason": "invalid_app"}
 
-    if lic["expires"]:
+    if lic["expires"] and lic["expires"] != "null":
         exp_date = datetime.fromisoformat(lic["expires"])
         if exp_date < datetime.now():
             return {"valid": False, "reason": "expired"}
